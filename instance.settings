@@ -1,0 +1,5 @@
+flavor= $myflavor
+image= $myimage 
+key_name= $mykey 
+security-groups= ALL_ICMP,ALL_to_CYBERA,Infrastructure 
+instance_name=$1
