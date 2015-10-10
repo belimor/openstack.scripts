@@ -11,6 +11,7 @@ if [ ! -f local.trust.security.groupe.id ] || [ -z $SecGrpID ]
     echo ${SecGrpID} > local.trust.security.groupe.id
   else
     nova secgroup-list | grep ${SecGrpID}
+fi
 # ----------------------------------------------------------------------------------
 liveIPs=$(nova list | grep cybera= | awk -F= '{print $2}' | awk -F, '{print $1}')
 echo ""
@@ -51,6 +52,5 @@ fwIPs=$(nova secgroup-list-rules ${SecGrpID} | grep / | awk '{print $8}' | awk -
 echo "Firewall_IPs:" $fwIPs | tr " " "\n" | sort -n | tr "\n" " "
 echo ""
 # ----------------------------------------------------------------------------------
-fi
 #for i in $(nova list | grep cybera= | awk -F= '{print $2}' | awk -F, '{print $1}'); do echo "--- $i"; done
 #nova secgroup-list-rules 2321 | grep / | awk '{print $8}' | awk -F/ '{print $1}' | uniq
