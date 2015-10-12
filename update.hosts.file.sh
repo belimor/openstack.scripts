@@ -11,5 +11,5 @@ echo "Updating /etc/hosts ..."
 for i in $allUUID; do
 	hname=$( nova show ${i} | grep '^| name' | awk '{print $4}' )
 	hip=$( nova show ${i} | grep network | awk '{print $5}' | awk -F, '{print $1}' )
-	echo "$hip $hname" >> /etc/hosts
+	echo "$hip $hname ${hname}.cloud.cybera.ca" >> /etc/hosts
 done
