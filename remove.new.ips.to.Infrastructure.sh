@@ -51,4 +51,4 @@ echo ""
 fwIPs=$(nova secgroup-list-rules ${SecGrpID} | grep / | awk '{print $8}' | awk -F/ '{print $1}' | uniq)
 echo "Firewall_IPs:" $fwIPs | tr " " "\n" | sort -n | tr "\n" " "
 echo ""
-
+fi
