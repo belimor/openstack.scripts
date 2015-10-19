@@ -1,0 +1,30 @@
+## rename to Vagrant
+
+require 'vagrant-openstack-plugin'
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "dummy"
+
+  ssh_key = "~/mykey.pem" # PATH TO YOUR PRIVATE KEY
+  config.ssh.private_key_path = "~/mykey.pem"
+
+  config.vm.provider :openstack do |os|
+    os.username = ENV['OS_USERNAME']
+    os.server_name = "mytest"
+    os.api_key = ENV['OS_PASSWORD']
+    os.tenant = ENV['OS_TENANT_NAME']
+    os.flavor = /m1.small/ # Regex or String
+    os.image = /Ubuntu 14.04/ # Regex or String
+    os.endpoint = "#{ENV['OS_AUTH_URL']}/tokens"
+    os.keypair_name = "mykey" # as stored in Nova
+    os.ssh_username = "ubuntu" # login for the VM
+    os.security_groups = ['default', 'security_group1', 'security_group2'] # optional
+
+    #os.address_id = "cybera" # Enable for IPv6
+    #os.floating_ip = "AAA.BBB.CCC.DDD" # optional (The floating IP to assign for this instance)
+    #os.floating_ip_pool = "nova"
+  end
+
+  config.vm.provision "shell", path: "./bootstrap.sh"
+
+end
