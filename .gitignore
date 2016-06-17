@@ -1,4 +1,5 @@
 local.trust.security.groupe.id
 *.pem
+*.rc
 .vagrant
 Vagrantfile
